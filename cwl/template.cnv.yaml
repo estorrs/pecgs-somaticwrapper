@@ -1,0 +1,14 @@
+is_wgs: a_bool
+normal_bam:
+  class: File
+  path: a/file/path
+reference:
+  class: File
+  path: a/file/path.fa
+  secondaryFiles:
+  - class: File
+    path: a/file/path.fa.fai
+sample: a_string
+tumor_bam:
+  class: File
+  path: a/file/path
