@@ -296,8 +296,6 @@ close DH;
 # start data processsing
 
 #`bgadd -L 70 $compute_username/$group_name`;
-
-
 if (($step_number < 12 && $step_number>0) || $step_number == 14) {
     #begin to process each sample
     for (my $i=0;$i<@sample_dir_list;$i++) {#use the for loop instead. the foreach loop has some problem to pass the global variable $sample_name to the sub functions
@@ -386,7 +384,6 @@ if($step_number==12)
 ### Annotate dnp 
 ### keep indel (for cocoexistence of indel and snv) 
 
-print "annotation\n"; 
 
 if($step_number==13)
     {
@@ -463,7 +460,6 @@ if($step_number==13)
 exit;
 
 ## run strelka
-
 sub bsub_strelka{
     #my $cdhitReport = $sample_full_path."/".$sample_name.".fa.cdhitReport";
     $current_job_file = "j1_streka_".$sample_name.".sh"; 
@@ -493,8 +489,8 @@ sub bsub_strelka{
     }
     my $lsf_out=$lsf_file_dir."/".$current_job_file.".out";
     my $lsf_err=$lsf_file_dir."/".$current_job_file.".err";
-    `rm $lsf_out`;
-    `rm $lsf_err`;
+    # `rm $lsf_out`;
+    # `rm $lsf_err`;
 	#`rm $current_job_file`;
 
     open(STREKA, ">$job_files_dir/$current_job_file") or die $!;
@@ -531,10 +527,10 @@ sub bsub_strelka{
     print STREKA "mkdir \${myRUNDIR}\n";
     print STREKA "fi\n";
 	### re-run, then delete task.complete file ###
-    print STREKA "if [ $status_rerun -eq 1 ]\n";
-    print STREKA "  then\n";
-    print STREKA "rm \${TASK_STATUS}\n";
-    print STREKA "fi\n";
+    # print STREKA "if [ $status_rerun -eq 1 ]\n";
+    # print STREKA "  then\n";
+    # print STREKA "rm \${TASK_STATUS}\n";
+    # print STREKA "fi\n";
     ## if STRELKA_VCF not existed 
     print STREKA "if [ ! -f \${STRELKA_VCF} ]\n";
     print STREKA "  then\n";
@@ -543,10 +539,10 @@ sub bsub_strelka{
 
     print STREKA "if [ ! -f  \${TASK_STATUS} ]\n";
     print STREKA "then\n";
-    print STREKA "if [ -d \${STRELKA_OUT} ]\n";
-    print STREKA "then\n";
-    print STREKA "rm -rf \${STRELKA_OUT}\n";
-    print STREKA "fi\n";
+    # print STREKA "if [ -d \${STRELKA_OUT} ]\n";
+    # print STREKA "then\n";
+    # print STREKA "rm -rf \${STRELKA_OUT}\n";
+    # print STREKA "fi\n";
     print STREKA "if \[\[ -z \"\$LD_LIBRARY_PATH\" \]\] \; then\n"; 
     print STREKA "export LD_LIBRARY_PATH=\${JAVA_HOME}/lib\n";
     print STREKA "else\n";

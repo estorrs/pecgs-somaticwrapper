@@ -23,6 +23,9 @@ parser.add_argument('normal_bam', type=str,
 parser.add_argument('--run-dir', type=str, default='output',
     help='Directory that somaticwrapper is run in. Default is output/')
 
+parser.add_argument('--log-dir', type=str, default='logs',
+    help='Directory that somaticwrapper is run in. Default is logs/')
+
 parser.add_argument('--reference', type=str,
     help='reference location')
 
@@ -38,11 +41,11 @@ args = parser.parse_args()
 SMG_FP = 'smg.txt'
 
 
-def call_somaticwrapper(run_dir, smg_fp, log_fp, step):
+def call_somaticwrapper(run_dir, smg_fp, log_dir, step):
     pieces = [
         'perl somaticwrapper.pl',
-        '-rdir', run_dir,
-        '--log', log_fp,
+        '--rdir', run_dir,
+        '--log', log_dir,
         '--ref', args.reference,
         '--smg', smg_fp,
         '--step', str(step)
@@ -53,10 +56,12 @@ def call_somaticwrapper(run_dir, smg_fp, log_fp, step):
 def setup_run():
     # make run dir
     Path(args.run_dir).mkdir(parents=True, exist_ok=True)
-    os.symlink(args.tumor_bam, os.path.join(args.run_dir, f'{args.sample}.T.bam'))
-    os.symlink(f'{args.tumor_bam}.bai', os.path.join(args.run_dir, f'{args.sample}.T.bam.bai'))
-    os.symlink(args.normal_bam, os.path.join(args.run_dir, f'{args.sample}.N.bam'))
-    os.symlink(f'{args.normal_bam}.bai', os.path.join(args.run_dir, f'{args.sample}.N.bam.bai'))
+    sample_dir = os.path.join(args.run_dir, args.sample)
+    Path(sample_dir).mkdir(parents=True, exist_ok=True)
+    os.symlink(args.tumor_bam, os.path.join(sample_dir, f'{args.sample}.T.bam'))
+    os.symlink(f'{args.tumor_bam}.bai', os.path.join(sample_dir, f'{args.sample}.T.bam.bai'))
+    os.symlink(args.normal_bam, os.path.join(sample_dir, f'{args.sample}.N.bam'))
+    os.symlink(f'{args.normal_bam}.bai', os.path.join(sample_dir, f'{args.sample}.N.bam.bai'))
 
     # make smg list
     df = pd.read_csv(args.rescue_genes, sep='\t', header=None)
@@ -73,16 +78,20 @@ def run_somaticwrapper():
 
     run_dir = os.path.abspath(args.run_dir)
     smg_fp = os.path.abspath(SMG_FP)
+    log_dir = os.path.abspath(args.log_dir)
+    Path(log_dir).mkdir(parents=True, exist_ok=True)
 
     logging.info(f'run dir: {run_dir}')
     logging.info(f'smg filepath: {smg_fp}')
+    logging.info(f'log dir: {log_dir}')
+
+    logging.info(f'run dir contents: {os.listdir(run_dir)}')
 
     os.chdir(args.script_dir)
 
     for i in range(1, 15, 1):
         logging.info(f'running step {i}')
-        log_fp = os.path.join(os.path.abspath(args.run_dir), f'step{i}.log')
-        cmd = call_somaticwrapper(run_dir, smg_fp, log_fp, i)
+        cmd = call_somaticwrapper(run_dir, smg_fp, log_dir, i)
         logging.info(f'executing command: {cmd}')
         subprocess.check_output(cmd, shell=True)
 
