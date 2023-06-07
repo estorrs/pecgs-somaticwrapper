@@ -185,12 +185,12 @@ if (! -d $HOME1)
 if (! -d $HOME1."/tmpsomatic") {
     `mkdir $HOME1"/tmpsomatic"`;
 }
-# my $job_files_dir = $HOME1."/tmpsomatic";
-# #store SGE output and error files here
-# if (! -d $HOME1."/LSF_DIR_SOMATIC") {
-#     `mkdir $HOME1"/LSF_DIR_SOMATIC"`;
-# }
-# my $lsf_file_dir = $HOME1."/LSF_DIR_SOMATIC";
+my $job_files_dir = $HOME1."/tmpsomatic";
+#store SGE output and error files here
+if (! -d $HOME1."/LSF_DIR_SOMATIC") {
+    `mkdir $HOME1"/LSF_DIR_SOMATIC"`;
+}
+my $lsf_file_dir = $HOME1."/LSF_DIR_SOMATIC";
 #GENOMEVIP_SCRIPTS=/gscmnt/gc2525/dinglab/rmashl/Software/bin/genomevip
 # obtain script path
 #my $script_dir="/gscuser/scao/scripts/git/somaticwrapper";
