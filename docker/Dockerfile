@@ -14,4 +14,6 @@ COPY . /pecgs-somaticwrapper
 
 ENV PATH="/miniconda/envs/somaticwrapper/bin:$PATH"
 
+RUN pip install pandas
+
 CMD /bin/bash
