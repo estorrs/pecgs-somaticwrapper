@@ -73,16 +73,15 @@ def run_somaticwrapper():
 
     run_dir = os.path.abspath(args.run_dir)
     smg_fp = os.path.abspath(SMG_FP)
-    log_fp = os.path.join(os.path.abspath(args.run_dir), f'step{i}.log')
 
     logging.info(f'run dir: {run_dir}')
     logging.info(f'smg filepath: {smg_fp}')
-    logging.info(f'log filepath: {log_fp}')
 
     os.chdir(args.script_dir)
 
     for i in range(1, 15, 1):
         logging.info(f'running step {i}')
+        log_fp = os.path.join(os.path.abspath(args.run_dir), f'step{i}.log')
         cmd = call_somaticwrapper(run_dir, smg_fp, log_fp, i)
         logging.info(f'executing command: {cmd}')
         subprocess.check_output(cmd, shell=True)
