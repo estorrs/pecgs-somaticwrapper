@@ -6,10 +6,10 @@ arguments:
   valueFrom: run
 baseCommand:
 - python
-- /pecgs-somaticwrapper/sommaticwrapper/somaticwrapper.py
+- /pecgs-somaticwrapper/somaticwrapper/somaticwrapper.py
 class: CommandLineTool
 cwlVersion: v1.0
-id: sommaticwrapper
+id: somaticwrapper
 inputs:
 - id: sample
   inputBinding:
@@ -42,7 +42,7 @@ inputs:
 - default: /miniconda/envs/somaticwrapper/bin:$PATH
   id: environ_PATH
   type: string?
-label: sommaticwrapper
+label: somaticwrapper
 outputs:
 - id: dnp_annotated_maf
   outputBinding:
