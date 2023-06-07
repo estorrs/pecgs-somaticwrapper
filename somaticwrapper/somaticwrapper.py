@@ -58,10 +58,18 @@ def setup_run():
     Path(args.run_dir).mkdir(parents=True, exist_ok=True)
     sample_dir = os.path.join(args.run_dir, args.sample)
     Path(sample_dir).mkdir(parents=True, exist_ok=True)
+    logging.info('linking bams')
     os.symlink(args.tumor_bam, os.path.join(sample_dir, f'{args.sample}.T.bam'))
     os.symlink(f'{args.tumor_bam}.bai', os.path.join(sample_dir, f'{args.sample}.T.bam.bai'))
     os.symlink(args.normal_bam, os.path.join(sample_dir, f'{args.sample}.N.bam'))
     os.symlink(f'{args.normal_bam}.bai', os.path.join(sample_dir, f'{args.sample}.N.bam.bai'))
+    # shutil.copy(args.tumor_bam, os.path.join(sample_dir, f'{args.sample}.T.bam'))
+    # shutil.copy(f'{args.tumor_bam}.bai', os.path.join(sample_dir, f'{args.sample}.T.bam.bai'))
+    # shutil.copy(args.normal_bam, os.path.join(sample_dir, f'{args.sample}.N.bam'))
+    # shutil.copy(f'{args.normal_bam}.bai', os.path.join(sample_dir, f'{args.sample}.N.bam.bai'))
+    logging.info('path exists:')
+    logging.info(os.path.exists('/storage1/fs1/dinglab/Active/Projects/estorrs/pecgs_resources/somaticwrapper/softwae/strelka-2.9.10.centos6_x86_64/bin/configureStrelkaSomaticWorkflow.py'))
+
 
     # make smg list
     df = pd.read_csv(args.rescue_genes, sep='\t', header=None)
