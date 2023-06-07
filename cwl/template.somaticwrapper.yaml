@@ -5,11 +5,14 @@ normal_bam:
   - class: File
     path: a/file/path.bam.bai
 reference:
-  class: Directory
+  class: File
   path: a/file/path.fa
   secondaryFiles:
   - class: File
     path: a/file/path.fa.fai
+rescue_genes:
+  class: File
+  path: a/file/path
 sample: a_string
 tumor_bam:
   class: File
