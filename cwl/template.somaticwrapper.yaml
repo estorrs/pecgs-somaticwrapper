@@ -1,8 +1,10 @@
-is_wgs: a_bool
 normal_bam:
   class: File
-  path: a/file/path
-reference_dir:
+  path: a/file/path.bam
+  secondaryFiles:
+  - class: File
+    path: a/file/path.bam.bai
+reference:
   class: Directory
   path: a/file/path.fa
   secondaryFiles:
@@ -11,4 +13,7 @@ reference_dir:
 sample: a_string
 tumor_bam:
   class: File
-  path: a/file/path
+  path: a/file/path.bam
+  secondaryFiles:
+  - class: File
+    path: a/file/path.bam.bai
