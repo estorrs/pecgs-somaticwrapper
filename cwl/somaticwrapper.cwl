@@ -48,7 +48,7 @@ outputs:
   outputBinding:
     glob: run.dnp.annotated.maf
   type: File
-- id: withmutect.maf
+- id: withmutect_maf
   outputBinding:
     glob: run.withmutect.maf
   type: File
