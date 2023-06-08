@@ -9,7 +9,19 @@ reference:
   path: a/file/path.fa
   secondaryFiles:
   - class: File
+    path: a/file/path.fa.amb
+  - class: File
+    path: a/file/path.fa.ann
+  - class: File
+    path: a/file/path.fa.bwt
+  - class: File
     path: a/file/path.fa.fai
+  - class: File
+    path: a/file/path.fa.pac
+  - class: File
+    path: a/file/path.fa.sa
+  - class: File
+    path: a/file/path.dict
 rescue_genes:
   class: File
   path: a/file/path

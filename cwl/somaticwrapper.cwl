@@ -32,7 +32,13 @@ inputs:
     position: '0'
     prefix: --reference
   secondaryFiles:
+  - .amb
+  - .ann
+  - .bwt
   - .fai
+  - .pac
+  - .sa
+  - ^.dict
   type: File
 - id: rescue_genes
   inputBinding:
