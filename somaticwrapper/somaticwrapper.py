@@ -63,13 +63,6 @@ def setup_run():
     os.symlink(f'{args.tumor_bam}.bai', os.path.join(sample_dir, f'{args.sample}.T.bam.bai'))
     os.symlink(args.normal_bam, os.path.join(sample_dir, f'{args.sample}.N.bam'))
     os.symlink(f'{args.normal_bam}.bai', os.path.join(sample_dir, f'{args.sample}.N.bam.bai'))
-    # shutil.copy(args.tumor_bam, os.path.join(sample_dir, f'{args.sample}.T.bam'))
-    # shutil.copy(f'{args.tumor_bam}.bai', os.path.join(sample_dir, f'{args.sample}.T.bam.bai'))
-    # shutil.copy(args.normal_bam, os.path.join(sample_dir, f'{args.sample}.N.bam'))
-    # shutil.copy(f'{args.normal_bam}.bai', os.path.join(sample_dir, f'{args.sample}.N.bam.bai'))
-    logging.info('path exists:')
-    logging.info(os.path.exists('/storage1/fs1/dinglab/Active/Projects/estorrs/pecgs_resources/somaticwrapper/softwae/strelka-2.9.10.centos6_x86_64/bin/configureStrelkaSomaticWorkflow.py'))
-
 
     # make smg list
     df = pd.read_csv(args.rescue_genes, sep='\t', header=None)
@@ -83,6 +76,8 @@ def setup_run():
 def run_somaticwrapper():
     logging.info('setting up run directory')
     setup_run()
+
+    original_cwd = os.getcwd()
 
     run_dir = os.path.abspath(args.run_dir)
     smg_fp = os.path.abspath(SMG_FP)
@@ -104,6 +99,7 @@ def run_somaticwrapper():
         subprocess.check_output(cmd, shell=True)
 
     logging.info('somaticwrapper run finished')
+    os.chdir(original_cwd)
 
 
 def main():
