@@ -45,7 +45,7 @@ inputs:
     position: '0'
     prefix: --rescue-genes
   type: File
-- default: /usr/bin:/miniconda/envs/somaticwrapper/bin:$PATH
+- default: /usr/bin:/opt/vep/src/ensembl-vep:/opt/vep/src/var_c_code:/miniconda/envs/somaticwrapper/bin:$PATH
   id: environ_PATH
   type: string?
 label: somaticwrapper
