@@ -45,18 +45,18 @@ inputs:
     position: '0'
     prefix: --rescue-genes
   type: File
-- default: /miniconda/envs/somaticwrapper/bin:$PATH
+- default: /usr/bin:/miniconda/envs/somaticwrapper/bin:$PATH
   id: environ_PATH
   type: string?
 label: somaticwrapper
 outputs:
 - id: dnp_annotated_maf
   outputBinding:
-    glob: run.dnp.annotated.maf
+    glob: run/run.dnp.annotated.maf
   type: File
 - id: withmutect_maf
   outputBinding:
-    glob: run.withmutect.maf
+    glob: run/run.withmutect.maf
   type: File
 requirements:
 - class: DockerRequirement

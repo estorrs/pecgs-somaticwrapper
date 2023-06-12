@@ -1,4 +1,8 @@
-FROM ubuntu:18.04
+# FROM ubuntu:18.04
+FROM ensemblorg/ensembl-vep:release_102.0
+USER root
+
+WORKDIR /
 
 RUN apt-get update && apt-get install -y vim wget curl git python2.7
 
@@ -10,10 +14,10 @@ ENV PATH="/miniconda/bin:$PATH"
 COPY ./env.yaml /pecgs-somaticwrapper/env.yaml
 RUN conda env create --file /pecgs-somaticwrapper/env.yaml 
 
-COPY . /pecgs-somaticwrapper
-
 RUN ln -s /usr/bin/python2.7 /usr/bin/python2
 
-ENV PATH="/miniconda/envs/somaticwrapper/bin:$PATH"
+COPY . /pecgs-somaticwrapper
+
+ENV PATH="/usr/bin:/miniconda/envs/somaticwrapper/bin:$PATH"
 
 CMD /bin/bash
