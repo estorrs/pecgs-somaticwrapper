@@ -22,7 +22,8 @@ my $perl_bin = $Config{perlpath};
 # Find out if samtools and tabix are properly installed, and warn the user if it's not
 #my ( $samtools ) = map{chomp; $_}`which samtools`;
 
-my $samtools = "/storage1/fs1/songcao/Active/Software/anaconda3/bin/samtools"; 
+# my $samtools = "/storage1/fs1/songcao/Active/Software/anaconda3/bin/samtools"; 
+my $samtools = "samtools"
 
 ( $samtools and -e $samtools ) or die "ERROR: Please install samtools, and make sure it's in your PATH\n";
 my ( $tabix ) = map{chomp; $_}`which tabix`;
