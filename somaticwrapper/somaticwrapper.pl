@@ -234,7 +234,7 @@ my $varscan="/storage1/fs1/dinglab/Active/Projects/estorrs/pecgs_resources/somat
 my $bamreadcount="/storage1/fs1/dinglab/Active/Projects/estorrs/pecgs_resources/somaticwrapper/software/bam-readcount/0.7.4/bam-readcount";
 # my $vepannot="/storage1/fs1/dinglab/Active/Projects/estorrs/pecgs_resources/somaticwrapper/db/hg38_database/vep/ensembl-tools-release-85/scripts/variant_effect_predictor/variant_effect_predictor.pl";
 # my $vepannot="/storage1/fs1/dinglab/Active/Projects/estorrs/pecgs_resources/somaticwrapper/software/ensembl-vep/vep";
-my $vepannot="vep";
+my $vepannot="/opt/vep/src/ensembl-vep/vep";
 # my $vepcache="/storage1/fs1/dinglab/Active/Projects/estorrs/pecgs_resources/somaticwrapper/db/hg38_database/vep/v85";
 my $vepcache="/storage1/fs1/dinglab/Active/Projects/estorrs/pecgs_resources/somaticwrapper/db/hg38_database/vep/v102";
 
@@ -1525,6 +1525,7 @@ sub bsub_vcf_2_maf{
     print MAF "EOF\n";
     print MAF "rm \${F_log_filtered}\n";	
   
+
 	### vep and vcf2maf annotation for all variants to get the annotated gene name for each variant ##
     print MAF "cd \${RUNDIR}\n";
     #print MAF ". $script_dir/set_envvars\n";
