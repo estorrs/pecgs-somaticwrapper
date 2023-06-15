@@ -23,7 +23,10 @@ my $perl_bin = $Config{perlpath};
 #my ( $samtools ) = map{chomp; $_}`which samtools`;
 
 # my $samtools = "/storage1/fs1/songcao/Active/Software/anaconda3/bin/samtools"; 
-my $samtools = "samtools"
+# my $samtools = "samtools";
+# my $samtools = map{chomp; $_}`which samtools`;
+my $samtools = '/miniconda/envs/somaticwrapper/bin/samtools';
+# print $samtools;
 
 ( $samtools and -e $samtools ) or die "ERROR: Please install samtools, and make sure it's in your PATH\n";
 my ( $tabix ) = map{chomp; $_}`which tabix`;
