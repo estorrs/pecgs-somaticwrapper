@@ -54,6 +54,10 @@ outputs:
   outputBinding:
     glob: run/run.dnp.annotated.maf
   type: File
+- id: dnp_annotated_coding_maf
+  outputBinding:
+    glob: run/run.dnp.annotated.coding.maf
+  type: File
 - id: withmutect_maf
   outputBinding:
     glob: run/run.withmutect.maf
